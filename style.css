@@ -1,0 +1,82 @@
+:root {
+    --primary: #ff71a5; /* Rosa chiclete */
+    --secondary: #ffa080; /* Marrom chocolate */
+    --light: #fff8e1;
+}
+body {
+    background-color: #fdf6f0;
+    font-family: "Poppins", sans-serif;
+}
+.navbar {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+.navbar-brand,
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+}
+.hero-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("https://images.unsplash.com/photo-1606890658317-7ff420b7e52c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80")
+        center/cover no-repeat;
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+}
+.flavor-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.flavor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(216, 27, 96, 0.2);
+}
+.flavor-img {
+    height: 220px;
+    object-fit: cover;
+}
+.badge-flavor {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+}
+.cart-item {
+    border-bottom: 1px dashed #ddd;
+    padding: 15px 0;
+}
+.total-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+.qrcode-placeholder {
+    width: 200px;
+    height: 200px;
+    background: #eee;
+    border: 2px dashed #ccc;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #888;
+}
+.highlight-config {
+    background: #fff3cd;
+    border: 2px dashed #ffc107;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #856404;
+}
+.quantity-input {
+    width: 70px;
+    display: inline-block;
+}
