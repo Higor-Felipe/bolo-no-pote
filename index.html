@@ -22,7 +22,6 @@
     <!-- Carrinho sempre visível -->
     <a href="carrinho.html" class="btn btn-outline-light position-relative d-lg-none me-2">
       <i class="fas fa-shopping-cart"></i>
-      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-badge-mobile">0</span>
     </a>
 
     <!-- Botão hamburguer -->
@@ -54,7 +53,7 @@
     <div class="hero-banner">
         <div class="container">
             <h1 class="display-3 fw-bold mb-4">Bolinhos no Pote Deliciosos!</h1>
-            <p class="lead mb-5">Escolha entre <strong>Prestígio, Ninho, Ninho com Brigadeiro, Brigadeiro e Dois Amores</strong></p>
+            <p class="lead mb-5">Escolha entre <strong>Ninho com Frutas Vermelhas, Ninho, Ninho com Brigadeiro, Brigadeiro e Dois Amores</strong></p>
             <a href="#sabores" class="btn btn-light btn-lg px-5">Ver Sabores</a>
         </div>
     </div>
@@ -115,13 +114,13 @@
 
 <!-- ==================== SCRIPTS ==================== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     // ==================== DADOS DOS SABORES (EDIÇÃO AQUI!) ====================
     const sabores = [
         {
             id: 1,
             nome: "Ninho com frutas vermelhas",
-            descricao: "Deliciosa combinação de brigadeiro com coco ralado e cobertura de chocolate.",
             preco: 8,
             img: "boloNinhofrutas.jpg"
         },
@@ -135,21 +134,18 @@
         {
             id: 3,
             nome: "Ninho com Brigadeiro",
-            descricao: "A clássica dupla: creme de ninho com brigadeiro gourmet.",
             preco: 8,
             img: "boloNinhobrigadeiro.jpg"
         },
         {
             id: 4,
             nome: "Brigadeiro",
-            descricao: "O tradicional brigadeiro cremoso, feito com chocolate belga.",
             preco: 8,
             img: "boloBrigadeiro.jpg"
         },
         {
             id: 5,
             nome: "Dois Amores",
-            descricao: "Brigadeiro tradicional + brigadeiro branco em camadas perfeitas.",
             preco: 8,
             img: "boloDoisamores.jpg"
         }
@@ -157,14 +153,6 @@
 
     // Carrinho
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-    // Atualizar contador do carrinho
-    function atualizarContador() {
-        const totalItens = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
-        document.getElementById('cart-count').textContent = totalItens;
-        document.getElementById('cart-badge').textContent = totalItens;
-        document.querySelector('a[href="carrinho.html"] .badge').textContent = totalItens;
-    }
 
     // Renderizar sabores
     function renderizarSabores() {
@@ -178,7 +166,6 @@
                         <img src="${sabor.img}" class="card-img-top flavor-img" alt="${sabor.nome}">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">${sabor.nome}</h5>
-                            <p class="card-text flex-grow-1">${sabor.descricao}</p>
                             <button class="btn btn-outline-primary mt-auto add-to-cart-btn" data-id="${sabor.id}">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
@@ -210,7 +197,7 @@
         document.getElementById('confirm-add-cart').onclick = () => {
             const qtd = parseInt(document.getElementById('modal-quantity').value);
             if (qtd < 1) return alert('Quantidade inválida');
-
+            alert('Adicionado no carrinho!')
             const existente = carrinho.find(item => item.id === sabor.id);
             if (existente) {
                 existente.quantidade += qtd;
@@ -231,6 +218,16 @@
             atualizarContador();
         }
     });
+</script>
+
+<script>    
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && event.key !== 'Control') {
+    event.preventDefault();
+    alert('Combinações com Ctrl estão desativadas neste site.');
+  }
+});
+
 </script>
 
 </body>

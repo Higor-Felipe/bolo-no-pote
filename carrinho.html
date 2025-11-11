@@ -130,7 +130,7 @@
                     <div class="text-end ms-4">
                         <strong>R$ ${subtotal.toFixed(2)}</strong>
                     </div>
-                    <button class="btn btn-sm btn-danger ms-3" onclick="removerItem(${index})">
+                    <button class="btn btn-sm btn-danger ms-3" onclick="removerItem(${index}); recarregarPagina()">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -159,7 +159,7 @@
                 } else if (metodo === 'dinheiro') {
                     msgDiv.innerHTML = `<div class="payment-info">💵 Pagamento em dinheiro será feito na hora da retirada.</div>`;
                 } else if (metodo === 'cartao') {
-                    msgDiv.innerHTML = `<div class="payment-info">💳 Pagamento com cartão (débito ou crédito) será na retirada ou combinado com a loja.</div>`;
+                    msgDiv.innerHTML = `<div class="payment-info">💳 Pagamento com cartão (débito ou crédito) será na retirada ou combinado.</div>`;
                 }
             });
         });
@@ -204,6 +204,10 @@
     }
 
     document.addEventListener('DOMContentLoaded', renderizarCarrinho);
+    
+    function recarregarPagina() {
+    location.reload(); // recarrega a página atual
+  }
 </script>
 
 </body>
