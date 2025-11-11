@@ -12,36 +12,39 @@
 <body>
 
 <!-- ==================== CABEÇALHO ==================== -->
-<nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <i class="fas fa-birthday-cake"></i> Doces no Pote
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <a class="nav-link" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#sabores">Sabores</a>
-                </li>
-                <li class="nav-item">
-                </li>
-            </ul>
-            <form class="d-flex me-3" onsubmit="return false;">
-                <input class="form-control me-2" type="search" placeholder="Buscar sabor..." aria-label="Buscar">
-                <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
-            </form>
-            <a href="carrinho.html" class="btn btn-outline-light position-relative">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-badge">0</span>
-            </a>
-        </div>
+<nav class="navbar navbar-expand-lg sticky-top" style="background: linear-gradient(90deg, #e382af, #f3bccb);">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand text-white fw-bold" href="index.html">
+      <i class="fas fa-birthday-cake me-2"></i> Doces no Pote
+    </a>
+
+    <!-- Carrinho sempre visível -->
+    <a href="carrinho.html" class="btn btn-outline-light position-relative d-lg-none me-2">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-badge-mobile">0</span>
+    </a>
+
+    <!-- Botão hamburguer -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Itens do menu -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#sabores">Sabores</a>
+        </li>
+      </ul>
+
+      <!-- Carrinho (versão desktop) -->
+      <a href="carrinho.html" class="btn btn-outline-light position-relative d-none d-lg-inline-block">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-badge">0</span>
+      </a>
     </div>
+  </div>
 </nav>
 
 <!-- ==================== PÁGINA INICIAL (index.html) ==================== -->
@@ -56,7 +59,7 @@
         </div>
     </div>
 
-    <!-- Destaque de Configuração (ONDE VOCÊ VAI SUBIR FOTOS, PREÇOS E DESCRIÇÕES) -->
+    <!-- Destaque de Configuração (ONDE VOCÊ VAI SUBIR FOTOS, PREÇOS E DESCRIÇÕES)
     <div class="container my-5">
         <div class="highlight-config text-center">
             <i class="fas fa-exclamation-triangle fa-2x mb-3"></i><br>
@@ -66,7 +69,7 @@
             • Alterar nome, descrição e preço (<code>preco</code>) de cada sabor<br>
             • Adicionar ou remover sabores conforme necessário
         </div>
-    </div>
+    </div> -->
 
     <!-- Seção de Sabores -->
     <section id="sabores" class="py-5">
@@ -117,38 +120,38 @@
     const sabores = [
         {
             id: 1,
-            nome: "Prestígio",
+            nome: "Ninho com frutas vermelhas",
             descricao: "Deliciosa combinação de brigadeiro com coco ralado e cobertura de chocolate.",
-            preco: 12.90,
-            img: "https://images.unsplash.com/photo-1622621711538-8ffed1c5c9c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" // SUBA SUA FOTO AQUI
+            preco: 8,
+            img: "boloNinhofrutas.jpg"
         },
         {
             id: 2,
             nome: "Ninho",
             descricao: "Cremoso leite ninho com toque suave e aveludado.",
-            preco: 11.90,
-            img: "https://images.unsplash.com/photo-1622621711538-8ffed1c5c9c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" // SUBA SUA FOTO AQUI
+            preco: 8,
+            img: "boloNinho.jpg"
         },
         {
             id: 3,
             nome: "Ninho com Brigadeiro",
             descricao: "A clássica dupla: creme de ninho com brigadeiro gourmet.",
-            preco: 13.90,
-            img: "https://images.unsplash.com/photo-1622621711538-8ffed1c5c9c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" // SUBA SUA FOTO AQUI
+            preco: 8,
+            img: "boloNinhobrigadeiro.jpg"
         },
         {
             id: 4,
             nome: "Brigadeiro",
             descricao: "O tradicional brigadeiro cremoso, feito com chocolate belga.",
-            preco: 11.90,
-            img: "https://images.unsplash.com/photo-1622621711538-8ffed1c5c9c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" // SUBA SUA FOTO AQUI
+            preco: 8,
+            img: "boloBrigadeiro.jpg"
         },
         {
             id: 5,
             nome: "Dois Amores",
             descricao: "Brigadeiro tradicional + brigadeiro branco em camadas perfeitas.",
-            preco: 13.90,
-            img: "https://images.unsplash.com/photo-1622621711538-8ffed1c5c9c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" // SUBA SUA FOTO AQUI
+            preco: 8,
+            img: "boloDoisamores.jpg"
         }
     ];
 

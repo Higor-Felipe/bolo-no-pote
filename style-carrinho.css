@@ -1,4 +1,4 @@
-:root { --primary: #d81b60; --secondary: #6d4c41; }
+:root { --primary: #e382af; --secondary: #f3bccb; }
         body { background-color: #fdf6f0; font-family: 'Poppins', sans-serif; }
         .navbar { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
         .navbar-brand, .nav-link { color: white !important; font-weight: 600; }
