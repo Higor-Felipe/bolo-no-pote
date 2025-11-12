@@ -186,10 +186,26 @@
             mensagem += `%0A💰 *Total: R$ ${total.toFixed(2)}*`;
 
             if (metodo === 'pix') {
-                // Simula QR Code (em produção, gere com API)
+                const totalFormatado = total.toFixed(2).replace('.', '');
+                const chavePix = "18997962232"; // ← Tem que editar, essa é a minha chave pix kkkkkk
+                const nomeRecebedor = "Doces no Pote"; // opcional
+
+                // Monta o payload do PIX
+                const payload = `00020126580014BR.GOV.BCB.PIX01${chavePix.length.toString().padStart(2, '0')}${chavePix}520400005303986540${totalFormatado.length.toString().padStart(2, '0')}${totalFormatado}5802BR59${nomeRecebedor.length.toString().padStart(2, '0')}${nomeRecebedor}62070503***6304`;
+
+                // Gera QR Code com valor
+                const qrcodeUrl = `https://gerador-pix.online/qr/?payload=${payload}`;
+
                 const qrcodeDiv = document.querySelector('.qrcode-placeholder');
-                qrcodeDiv.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PIX_CHAVE_AQUI" class="img-fluid">`;
-                alert('QR Code gerado! Escaneie para pagar.');
+                qrcodeDiv.innerHTML = `
+                    <div class="text-center">
+                        <img src="${qrcodeUrl}" class="img-fluid" style="max-width: 220px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <p class="mt-2 small text-success"><strong>Valor: R$ ${total.toFixed(2)}</strong></p>
+                        <p class="small text-muted">Escaneie com o app do banco</p>
+                    </div>
+                `;
+
+                alert('QR Code gerado com o valor exato! Escaneie para pagar.');
             }
             const whatsappUrl = `https://wa.me/5518997369593?text=${mensagem}`; // SUBSTITUA O NÚMERO
             window.open(whatsappUrl, '_blank');
