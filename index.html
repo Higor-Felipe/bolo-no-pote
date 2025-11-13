@@ -16,26 +16,8 @@
   <div class="container">
     <!-- Logo -->
     <a class="navbar-brand text-white fw-bold" href="index.html">
-      <i class="fas fa-birthday-cake me-2"></i> Doces no Pote
+      <i class="fas fa-birthday-cake me-2"></i> Doce Encanto
     </a>
-
-    <!-- Carrinho sempre visível -->
-    <a href="carrinho.html" class="btn btn-outline-light position-relative d-lg-none me-2">
-      <i class="fas fa-shopping-cart"></i>
-    </a>
-
-    <!-- Botão hamburguer -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Itens do menu -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#sabores">Sabores</a>
-        </li>
-      </ul>
 
     <!-- CARRINHO MOBILE -->
     <a href="carrinho.html" class="btn btn-outline-light position-relative d-lg-none me-2">
@@ -124,33 +106,39 @@
 <script>
     // ==================== DADOS DOS SABORES (EDIÇÃO AQUI!) ====================
     const sabores = [
-        {
+            {
             id: 1,
-            nome: "Ninho com frutas vermelhas",
-            preco: 8,
-            img: "boloNinhofrutas.jpg"
+            nome: "Ninho com Nutella",
+            preco: 10,
+            img: "boloNinhoNutella.jpg"
         },
         {
             id: 2,
+            nome: "Ninho com frutas vermelhas",
+            preco: 10,
+            img: "boloNinhofrutas.jpg"
+        },
+        {
+            id: 3,
             nome: "Ninho",
             descricao: "Cremoso leite ninho com toque suave e aveludado.",
             preco: 8,
             img: "boloNinho.jpg"
         },
         {
-            id: 3,
+            id: 4,
             nome: "Ninho com Brigadeiro",
             preco: 8,
             img: "boloNinhobrigadeiro.jpg"
         },
         {
-            id: 4,
+            id: 5,
             nome: "Brigadeiro",
             preco: 8,
             img: "boloBrigadeiro.jpg"
         },
         {
-            id: 5,
+            id: 6,
             nome: "Dois Amores",
             preco: 8,
             img: "boloDoisamores.jpg"
@@ -212,7 +200,6 @@
         document.getElementById('confirm-add-cart').onclick = () => {
             const qtd = parseInt(document.getElementById('modal-quantity').value);
             if (qtd < 1) return alert('Quantidade inválida');
-            alert('Adicionado no carrinho!')
             const existente = carrinho.find(item => item.id === sabor.id);
             if (existente) {
                 existente.quantidade += qtd;
