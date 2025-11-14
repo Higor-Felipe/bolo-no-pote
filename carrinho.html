@@ -1,241 +1,262 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrinho - Doces no Pote</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style-carrinho.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Carrinho - Doces no Pote</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="style-carrinho.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <!-- Biblioteca QRCode.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    </head>
+    <body>
 
-<!-- Cabeçalho -->
-<nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <i class="fas fa-birthday-cake"></i>     Doce Encanto
-        </a>
-    </div>
-</nav>
+    <!-- Cabeçalho -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-birthday-cake"></i> Doce Encanto
+            </a>
+        </div>
+    </nav>
 
-<div class="container py-5" id="carrinho-page">
-    <h2 class="mb-4 text-center" style="color: var(--secondary);">
-        <i class="fas fa-shopping-cart"></i> Seu Carrinho
-    </h2>
+    <div class="container py-5" id="carrinho-page">
+        <h2 class="mb-4 text-center" style="color: var(--secondary);">
+            <i class="fas fa-shopping-cart"></i> Seu Carrinho
+        </h2>
 
-    <div id="carrinho-vazio" class="text-center py-5 d-none">
-        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
-        <p class="text-muted">Seu carrinho está vazio.</p>
-        <a href="index.html" class="btn btn-primary" style="background: #59176a; border: none">Escolher sabores</a>
-    </div>
-
-    <div id="carrinho-itens"></div>
-
-    <div id="form-dados" class="mt-5 d-none">
-        <h4><i class="fas fa-user"></i> Dados do Cliente</h4>
-        <div class="mb-3">
-            <label class="form-label">Nome completo *</label>
-            <input type="text" id="nome-cliente" class="form-control" required>
+        <div id="carrinho-vazio" class="text-center py-5 d-none">
+            <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+            <p class="text-muted">Seu carrinho está vazio.</p>
+            <a href="index.html" class="btn btn-primary" style="background: #59176a; border: none">Escolher sabores</a>
         </div>
 
-        <h4 class="mt-4"><i class="fas fa-money-bill-wave"></i> Método de Pagamento</h4>
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pagamento" id="pag-pix" value="pix">
-                    <label class="form-check-label fw-bold" for="pag-pix">PIX</label>
+        <div id="carrinho-itens"></div>
+
+        <div id="form-dados" class="mt-5 d-none">
+            <h4><i class="fas fa-user"></i> Dados do Cliente</h4>
+            <div class="mb-3">
+                <label class="form-label">Nome completo *</label>
+                <input type="text" id="nome-cliente" class="form-control" required>
+            </div>
+
+            <h4 class="mt-4"><i class="fas fa-money-bill-wave"></i> Método de Pagamento</h4>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pagamento" id="pag-pix" value="pix">
+                        <label class="form-check-label fw-bold" for="pag-pix">PIX</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pagamento" id="pag-dinheiro" value="dinheiro">
+                        <label class="form-check-label fw-bold" for="pag-dinheiro">Dinheiro</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pagamento" id="pag-cartao" value="cartao">
+                        <label class="form-check-label fw-bold" for="pag-cartao">Cartão (Déb/Créd)</label>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pagamento" id="pag-dinheiro" value="dinheiro">
-                    <label class="form-check-label fw-bold" for="pag-dinheiro">Dinheiro</label>
-                </div>
+
+            <div id="msg-pagamento"></div>
+
+            <div class="aviso-pagamento">
+                <spam>PAGAMENTOS IRÃO SER ACEITOS ATÉ DIA 17</spam>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pagamento" id="pag-cartao" value="cartao">
-                    <label class="form-check-label fw-bold" for="pag-cartao">Cartão (Déb/Créd)</label>
-                </div>
+
+            <div class="text-center mt-4">
+                <h3 class="total-price">Total: R$ <span id="total-valor">0,00</span></h3>
+                <button id="btn-concluir" class="btn btn-success btn-lg px-5 mt-3">
+                    <i class="fab fa-whatsapp"></i> Enviar Pedido no WhatsApp
+                </button>
             </div>
-        </div>
-
-        <div id="msg-pagamento"></div>
-
-        <div class="aviso-pagamento">
-            <spam>PAGAMENTOS IRÃO SER ACEITOS ATÉ DIA 17</spam>
-        </div>
-
-        <div class="text-center mt-4">
-            <h3 class="total-price">Total: R$ <span id="total-valor">0,00</span></h3>
-            <button id="btn-concluir" class="btn btn-success btn-lg px-5 mt-3">
-                <i class="fab fa-whatsapp"></i> Enviar Pedido no WhatsApp
-            </button>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const sabores = [ /* Mesmos dados do index.html - copie e cole aqui para consistência */ ];
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-    // Copie o array `sabores` do index.html aqui (ou use um arquivo externo .js compartilhado)
-    const saboresData = [
-        { id: 1, nome: "Prestígio", descricao: "Deliciosa combinação de brigadeiro com coco ralado e cobertura de chocolate.", preco: 12.90, img: "" },
-        { id: 2, nome: "Ninho", descricao: "Cremoso leite ninho com toque suave e aveludado.", preco: 11.90, img: "" },
-        { id: 3, nome: "Ninho com Brigadeiro", descricao: "A clássica dupla: creme de ninho com brigadeiro gourmet.", preco: 13.90, img: "" },
-        { id: 4, nome: "Brigadeiro", descricao: "O tradicional brigadeiro cremoso, feito com chocolate belga.", preco: 11.90, img: "" },
-        { id: 5, nome: "Dois Amores", descricao: "Brigadeiro tradicional + brigadeiro branco em camadas perfeitas.", preco: 13.90, img: "" }
-    ];
+        const saboresData = [
+                {
+                id: 1,
+                nome: "Ninho com Nutella",
+                preco: 10,
+                img: "boloNinhoNutella.jpg"
+            },
+            {
+                id: 2,
+                nome: "Ninho com frutas vermelhas",
+                preco: 10,
+                img: "boloNinhofrutas.jpg"
+            },
+            {
+                id: 3,
+                nome: "Ninho",
+                preco: 8,
+                img: "boloNinho.jpg"
+            },
+            {
+                id: 4,
+                nome: "Ninho com Brigadeiro",
+                preco: 8,
+                img: "boloNinhobrigadeiro.jpg"
+            },
+            {
+                id: 5,
+                nome: "Brigadeiro",
+                preco: 8,
+                img: "boloBrigadeiro.jpg"
+            },
+            {
+                id: 6,
+                nome: "Dois Amores",
+                preco: 8,
+                img: "boloDoisamores.jpg"
+            }
+        ];
+        //copiar
+            function copyToClickBoard(btn) {
+                const chave = document.getElementById("dado").innerText;
 
-    function renderizarCarrinho() {
-        const itensDiv = document.getElementById('carrinho-itens');
-        const vazio = document.getElementById('carrinho-vazio');
-        const form = document.getElementById('form-dados');
+                navigator.clipboard.writeText(chave).then(() => {
+                    btn.innerText = "Chave Copiada!";
+                    btn.classList.add("copiado");
 
-        if (carrinho.length === 0) {
-            vazio.classList.remove('d-none');
-            form.classList.add('d-none');
-            return;
-        }
+                    setTimeout(() => {
+                        btn.innerText = "Copiar";
+                        btn.classList.remove("copiado");
+                    }, 2000);
+                });
+            }
+        // ============================================
+        // RENDERIZAÇÃO DO CARRINHO
+        // ============================================
+        function renderizarCarrinho() {
+            const itensDiv = document.getElementById('carrinho-itens');
+            const vazio = document.getElementById('carrinho-vazio');
+            const form = document.getElementById('form-dados');
 
-        vazio.classList.add('d-none');
-        form.classList.remove('d-none');
-
-        itensDiv.innerHTML = '';
-        let total = 0;
-
-        carrinho.forEach((item, index) => {
-            const sabor = saboresData.find(s => s.id == item.id);
-            const subtotal = item.preco * item.quantidade;
-            total += subtotal;
-
-            const div = `
-                <div class="cart-item d-flex align-items-center">
-                    <img src="${item.img || 'https://via.placeholder.com/80'}" class="cart-item-img me-3" alt="${item.nome}">
-                    <div class="flex-grow-1">
-                        <h6 class="mb-1">${item.nome}</h6>
-                        <small class="text-muted">R$ ${item.preco.toFixed(2)} unid.</small>
-                    </div>
-                    <div class="text-center">
-                        <small>Qtd:</small><br>
-                        <strong>${item.quantidade}</strong>
-                    </div>
-                    <div class="text-end ms-4">
-                        <strong>R$ ${subtotal.toFixed(2)}</strong>
-                    </div>
-                    <button class="btn btn-sm btn-danger ms-3" onclick="removerItem(${index}); recarregarPagina()">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `;
-            itensDiv.innerHTML += div;
-        });
-
-        document.getElementById('total-valor').textContent = total.toFixed(2);
-
-        // Eventos de pagamento
-        document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                const msgDiv = document.getElementById('msg-pagamento');
-                msgDiv.innerHTML = '';
-                const metodo = radio.value;
-
-                if (metodo === 'pix') {
-                    msgDiv.innerHTML = `
-                        <div class="payment-info">
-                            <p><strong>PIX selecionado!</strong> Após clicar em "Concluir", será exibido o QR Code.</p>
-                            <div class="qrcode-placeholder">
-                                QR Code aparecerá aqui após concluir
-                            </div>
-                        </div>
-                    `;
-                } else if (metodo === 'dinheiro') {
-                    msgDiv.innerHTML = `<div class="payment-info">💵 Pagamento em dinheiro será feito na hora da retirada.</div>`;
-                } else if (metodo === 'cartao') {
-                    msgDiv.innerHTML = `<div class="payment-info">💳 Pagamento com cartão (débito ou crédito) será na retirada ou combinado.</div>`;
-                }
-            });
-        });
-
-        // Botão concluir
-        document.getElementById('btn-concluir').onclick = () => {
-            const nome = document.getElementById('nome-cliente').value.trim();
-            const metodo = document.querySelector('input[name="pagamento"]:checked')?.value;
-
-            if (!nome || !metodo) {
-                alert('Preencha seu nome e escolha o método de pagamento!');
+            if (carrinho.length === 0) {
+                vazio.classList.remove('d-none');
+                form.classList.add('d-none');
                 return;
             }
 
-            let mensagem = `*NOVO PEDIDO - DOCES NO POTE*%0A%0A`;
-            mensagem += `👤 *Cliente:* ${nome}%0A`;
-            mensagem += `💳 *Pagamento:* ${metodo.toUpperCase()}%0A%0A`;
-            mensagem += `*ITENS:*%0A`;
+            vazio.classList.add('d-none');
+            form.classList.remove('d-none');
 
-            carrinho.forEach(item => {
-                mensagem += `• ${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
-            });
+            itensDiv.innerHTML = '';
+            let total = 0;
 
-            mensagem += `%0A💰 *Total: R$ ${total.toFixed(2)}*`;
+            carrinho.forEach((item, index) => {
+                const subtotal = item.preco * item.quantidade;
+                total += subtotal;
 
-            if (metodo === 'pix') {
-                const totalFormatado = total.toFixed(2).replace('.', '');
-                const chavePix = "18997962232"; // ← Tem que editar, essa é a minha chave pix kkkkkk
-                const nomeRecebedor = "Doces no Pote"; // opcional
-
-                // Monta o payload do PIX
-                const payload = `00020126580014BR.GOV.BCB.PIX01${chavePix.length.toString().padStart(2, '0')}${chavePix}520400005303986540${totalFormatado.length.toString().padStart(2, '0')}${totalFormatado}5802BR59${nomeRecebedor.length.toString().padStart(2, '0')}${nomeRecebedor}62070503***6304`;
-
-                // Gera QR Code com valor
-                const qrcodeUrl = `https://gerador-pix.online/qr/?payload=${payload}`;
-
-                const qrcodeDiv = document.querySelector('.qrcode-placeholder');
-                qrcodeDiv.innerHTML = `
-                    <div class="text-center">
-                        <img src="${qrcodeUrl}" class="img-fluid" style="max-width: 220px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <p class="mt-2 small text-success"><strong>Valor: R$ ${total.toFixed(2)}</strong></p>
-                        <p class="small text-muted">Escaneie com o app do banco</p>
+                const div = `
+                    <div class="cart-item d-flex align-items-center">
+                        <img src="${item.img || 'https://via.placeholder.com/80'}" class="cart-item-img me-3" alt="${item.nome}">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">${item.nome}</h6>
+                            <small class="text-muted">R$ ${item.preco.toFixed(2)} unid.</small>
+                        </div>
+                        <div class="text-center">
+                            <small>Qtd:</small><br>
+                            <strong>${item.quantidade}</strong>
+                        </div>
+                        <div class="text-end ms-4">
+                            <strong>R$ ${subtotal.toFixed(2)}</strong>
+                        </div>
+                        <button class="btn btn-sm btn-danger ms-3" onclick="removerItem(${index}); recarregarPagina()">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 `;
+                itensDiv.innerHTML += div;
+            });
 
-                alert('QR Code gerado com o valor exato! Escaneie para pagar.');
-            }
-            const whatsappUrl = `https://wa.me/5518997369593?text=${mensagem}`; // SUBSTITUA O NÚMERO
-            window.open(whatsappUrl, '_blank');
-        };
-    }
-    function removerItem(index) {
-        carrinho.splice(index, 1);
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        renderizarCarrinho();
-        // Atualiza contador no index.html (se aberto)
-        if (window.opener) window.opener.atualizarContador();
-    }
+            document.getElementById('total-valor').textContent = total.toFixed(2);
 
-    document.addEventListener('DOMContentLoaded', renderizarCarrinho);
-    
-    function recarregarPagina() {
-    location.reload(); // recarrega a página atual
-  }
-</script>
+            // ============================================
+            // EVENTOS DE SELEÇÃO DE PAGAMENTO
+            // ============================================
+            document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    const msgDiv = document.getElementById('msg-pagamento');
+                    msgDiv.innerHTML = '';
+                    const metodo = radio.value;
 
-<script>
-document.addEventListener('keydown', function(event) {
-  if (event.ctrlKey && event.key !== 'Control') {
-    event.preventDefault();
-  }
-  if (event.keyCode === 123) { // 123 é o código para a tecla F12
-    event.preventDefault();
-  }
-});
-document.addEventListener('contextmenu', function(event) {
-  event.preventDefault();
-});
-</script>
 
-</body>
-</html>
+                    if (metodo === 'pix') {
+                        msgDiv.innerHTML = `
+                            <div class="payment-info">
+                                <p class="mb-1 fw-bold">✅ PIX selecionado!</p>
+
+                                <p id="dado" class="chavePix">543.354.448-11</p>
+
+                                <button class="botaoCopiar" onclick="copyToClickBoard(this)">Copiar</button><br><br>
+                                <h5 class="textoPix">O COMPROVANTE DEVE SER ENVIADO PELO WHATSAPP DO PEDIDO</h5>
+                            </div>`;
+
+                    } else if (metodo === 'dinheiro') {
+                        msgDiv.innerHTML = `<div class="payment-info">💵 Pagamento em dinheiro será feito na hora da retirada.</div>`;
+                    } else if (metodo === 'cartao') {
+                        msgDiv.innerHTML = `<div class="payment-info">💳 Pagamento com cartão (débito ou crédito) será na retirada ou combinado.</div>`;
+                    }
+                });
+            });
+
+            // ============================================
+            // BOTÃO CONCLUIR PEDIDO
+            // ============================================
+            document.getElementById('btn-concluir').onclick = () => {
+                const nome = document.getElementById('nome-cliente').value.trim();
+                const metodo = document.querySelector('input[name="pagamento"]:checked')?.value;
+
+                if (!nome || !metodo) {
+                    alert('Preencha seu nome e escolha o método de pagamento!');
+                    return;
+                }
+
+                let mensagem = `*NOVO PEDIDO - DOCES NO POTE*%0A%0A`;
+                mensagem += `👤 *Cliente:* ${nome}%0A`;
+                mensagem += `💳 *Pagamento:* ${metodo.toUpperCase()}%0A%0A`;
+                mensagem += `*ITENS:*%0A`;
+
+                carrinho.forEach(item => {
+                    mensagem += `• ${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
+                });
+
+                mensagem += `%0A💰 *Total: R$ ${total.toFixed(2)}*%0A\n`;
+                if (metodo === 'pix') {
+                    mensagem += `%0A✅ *CHAVE PIX:* 543.354.448-11%0A\n`;
+                    mensagem += `%0A‼️ *O COMPROVANTE DEVE SER ENVIADO AQUI*%0A`;
+                } 
+                // Abre WhatsApp
+                const whatsappUrl = `https://wa.me/5518997369593?text=${mensagem}`;
+                window.open(whatsappUrl, '_blank');
+            };
+        }
+
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            renderizarCarrinho();
+            if (window.opener) window.opener.atualizarContador();
+        }
+
+        function recarregarPagina() {
+            location.reload();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderizarCarrinho);
+    </script>
+
+    </body>
+    </html>
