@@ -16,12 +16,111 @@ body {
     font-weight: 600;
 }
 .hero-banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("https://images.unsplash.com/photo-1606890658317-7ff420b7e52c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80")
-        center/cover no-repeat;
-    color: white;
-    padding: 120px 0;
+    position: relative;
+    padding: 60px 20px;
     text-align: center;
+    overflow: hidden;
+    background: transparent; /* Remove o fundo cinza */
+}
+
+.hero-banner .container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.sorteio-img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.sorteio-img:hover {
+    transform: scale(1.02);
+}
+
+.banner-content {
+    text-decoration: none;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    margin: 0 auto;
+    backdrop-filter: blur(5px);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.banner-content h1 {
+    font-size: 2.2rem;
+    color: #d81b60;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.banner-content p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.btn-ver-sabores {
+    text-decoration: none;
+    background: #ff4081;
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+}
+
+.btn-ver-sabores:hover {
+    text-decoration: none;
+    background: #e91e63;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-banner {
+        padding: 40px 15px;
+    }
+    
+    .banner-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .banner-content p {
+        font-size: 1rem;
+    }
+    
+    .sorteio-img {
+        max-width: 100%;
+        border-radius: 15px;
+    }
+}
+
+/* Animação suave */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 .flavor-card {
     transition: transform 0.3s, box-shadow 0.3s;
