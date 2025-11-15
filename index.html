@@ -163,7 +163,7 @@
     container.innerHTML = '';
     
     sabores.forEach(sabor => {
-        const isPremium = sabor.id === 1 || sabor.id === 2;
+        const isPremium = sabor.preco > 8;
 
         const card = `
             <div class="col">
