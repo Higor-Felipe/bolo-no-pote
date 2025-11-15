@@ -154,6 +154,79 @@ body {
     font-weight: bold;
     color: var(--primary);
 }
+/* Card Premium - borda e sombra dourada */
+.premium-card {
+    border: 2px solid #ffd700 !important;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2) !important;
+    transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3) !important;
+    border-color: #ffed4e !important;
+}
+
+/* Badge de preço premium */
+.premium-badge {
+    background: linear-gradient(135deg, #ffd700, #ffed4e) !important;
+    color: #333 !important;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 8px 14px;
+    border-radius: 30px;
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+}
+
+/* Faixa PREMIUM no topo */
+.premium-ribbon {
+    position: absolute;
+    top: 12px;
+    right: -38px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #333;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 6px 40px;
+    transform: rotate(45deg);
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    letter-spacing: 1px;
+}
+
+.premium-ribbon span {
+    display: block;
+    transform: rotate(-45deg);
+}
+
+/* Texto "Sabor Premium" */
+.premium-label {
+    font-size: 0.85rem;
+    color: #d4af37;
+    font-weight: 600;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px dashed #ffd700;
+    align-self: flex-start;
+}
+
+/* Botão premium */
+.premium-btn {
+    border-color: #ffd700 !important;
+    color: #ffd700 !important;
+    font-weight: 600;
+    background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,237,78,0.05));
+}
+
+.premium-btn:hover {
+    background: linear-gradient(135deg, #ffd700, #ffed4e) !important;
+    color: #333 !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+}
 .qrcode-placeholder {
     width: 200px;
     height: 200px;

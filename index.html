@@ -159,25 +159,44 @@
 
     // Renderizar sabores
     function renderizarSabores() {
-        const container = document.getElementById('flavors-container');
-        container.innerHTML = '';
-        sabores.forEach(sabor => {
-            const card = `
-                <div class="col">
-                    <div class="card flavor-card h-100 position-relative">
-                        <span class="badge badge-flavor">R$ ${sabor.preco.toFixed(2)}</span>
-                        <img src="${sabor.img}" class="card-img-top flavor-img" alt="${sabor.nome}">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${sabor.nome}</h5>
-                            <button class="btn btn-outline-primary mt-auto add-to-cart-btn" data-id="${sabor.id}">
-                                <i class="fas fa-cart-plus"></i> Adicionar
-                            </button>
-                        </div>
+    const container = document.getElementById('flavors-container');
+    container.innerHTML = '';
+    
+    sabores.forEach(sabor => {
+        const isPremium = sabor.id === 1 || sabor.id === 2;
+
+        const card = `
+            <div class="col">
+                <div class="card flavor-card h-100 position-relative ${isPremium ? 'premium-card' : ''}">
+                    
+                    <!-- Badge de preço (dourado se premium) -->
+                    <span class="badge badge-flavor ${isPremium ? 'premium-badge' : ''}">
+                        R$ ${sabor.preco.toFixed(2)}
+                    </span>
+
+
+                    <img src="${sabor.img}" class="card-img-top flavor-img" alt="${sabor.nome}">
+                    
+                    <div class="card-body d-flex flex-column">
+                        <!-- Título com coroa se premium -->
+                        <h5 class="card-title d-flex align-items-center gap-2">
+                            ${isPremium ? '<i class="fas fa-crown text-warning"></i>' : ''}
+                            ${sabor.nome}
+                        </h5>
+
+                        <!-- Texto "Sabor Premium" -->
+                        ${isPremium ? '<p class="premium-label mb-2">Sabor Premium</p>' : ''}
+
+                        <button class="btn btn-outline-primary mt-auto add-to-cart-btn ${isPremium ? 'premium-btn' : ''}" 
+                                data-id="${sabor.id}">
+                            <i class="fas fa-cart-plus"></i> Adicionar
+                        </button>
                     </div>
                 </div>
-            `;
-            container.innerHTML += card;
-        });
+            </div>
+        `;
+        container.innerHTML += card;
+    });
 
         // Adicionar evento aos botões
         document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
