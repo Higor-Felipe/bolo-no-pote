@@ -1,147 +1,93 @@
 :root { --primary: #e382af; --secondary: #f3bccb; }
-        body { background-color: #fdf6f0; font-family: 'Poppins', sans-serif; }
-        .navbar { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
-        .navbar-brand, .nav-link { color: white !important; font-weight: 600; }
-        .cart-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; }
-        .total-price { font-size: 1.8rem; font-weight: bold; color: var(--primary); }
-        .qrcode-placeholder {
-            width: 220px;
-            height: 220px;
-            background: #f8f9fa;
-            border: 3px dashed #ccc;
-            margin: 25px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-style: italic;
-            color: #666;
-            border-radius: 15px;
-        }
-        .aviso-pagamento {
-            color: #fff;
-            background: #ff0e0e;
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.2s ease;
-            text-align: center;
-            display: inline-block;
-            margin: 0 auto;
-        }
-        .payment-info {
-            background: #e3f2fd;
-            border-left: 5px solid var(--primary);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        #pag-pix + label {
-        color: #fff;
-        background: #ffa2e9;
-        padding: 6px 12px;
-        border-radius: 30px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease;
-    }
-        #pag-dinheiro + label {
-        color: #fff;
-        background: #ffa2e9;
-        padding: 6px 12px;
-        border-radius: 30px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease;
-    }
-        #pag-cartao + label {
-        color: #fff;
-        background: #ffa2e9;
-        padding: 6px 12px;
-        border-radius: 30px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease;
-    }
-        #pag-pix:checked + label {
-        color: #fff;
-        background: #25d366;
-        padding: 6px 12px;
-        border-radius: 30px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease;
-    }
-    #pag-dinheiro:checked + label {
-        color: #fff;
-        background: #25d366;
-        padding: 6px 12px;
-        border-radius: 30px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease;
-    }
-    #pag-cartao:checked + label {
-        color: #fff;
-        background: #25d366;
-        padding: 6px 12px;
-        border-radius: 30px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease;
-    }
-    /* Oculta a chave visualmente mas mantém ela acessível para copiar */
-.chavePix {
-    color: transparent;
-    user-select: none;
-    pointer-events: none;
-    position: relative;
-}
+body { background-color: #fdf6f0; font-family: 'Poppins', sans-serif; }
+.navbar { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+.navbar-brand, .nav-link { color: white !important; font-weight: 600; }
+.cart-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; }
+.total-price { font-size: 1.8rem; font-weight: bold; color: var(--primary); }
 
-.chavePix::after {
-    content: "•••••••••••••••"; /* bolinhas no lugar da chave */
-    color: #e3f2fd; /* rosa do site */
-    font-weight: 600;
-    letter-spacing: 2px;
-}
-
-/* Botão estilizado */
-.botaoCopiar {
-    background-color: #ff9ac6;
-    color: #fff;
-    border: none;
-    padding: 10px 22px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.25s ease;
-    box-shadow: 0 3px 8px rgba(255, 130, 170, 0.35);
-    font-family: "Poppins", sans-serif;
-}
-
-/* Hover */
-.botaoCopiar:hover {
-    background-color: #ff7eb6;
-    box-shadow: 0 4px 10px rgba(255, 120, 170, 0.45);
-    transform: translateY(-2px);
-}
-
-/* Quando clicado */
-.botaoCopiar.copiado {
-    background-color: #4BB543; /* verde sucesso */
-    box-shadow: 0 3px 8px rgba(75, 181, 67, 0.35);
-}
-.textoPix {
-    display: inline-block;
-    background: #ffe2ef;                   /* rosa bem claro */
-    color: #d61b6a;                        /* rosa forte para destaque */
-    padding: 10px 18px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
+/* === QR CODE PLACEHOLDER (CORRIGIDO E LINDO) === */
+.qrcode-placeholder {
+    margin: 25px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    max-width: 360px;
+    width: 100%;
     text-align: center;
-    margin-top: 12px;
-    box-shadow: 0 2px 8px rgba(255, 120, 170, 0.25);
-    font-family: "Poppins", sans-serif;
+    transition: all 0.3s ease;
+}
+
+.qrcode-placeholder img {
+    max-width: 220px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+.qrcode-placeholder .text-success {
+    color: #25d366 !important;
+}
+
+.qrcode-placeholder .bg-warning {
+    background: #fff3cd !important;
+    color: #856404 !important;
+    border: 1px solid #ffeaa7;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+}
+
+.qrcode-placeholder .btn {
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+/* === AVISO PAGAMENTO === */
+.aviso-pagamento {
+    color: #fff;
+    background: #ff0e0e;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+    font-size: 0.9rem;
+}
+
+/* === ESTILOS DOS RADIOS === */
+.payment-info {
+    background: #e3f2fd;
+    border-left: 5px solid var(--primary);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+/* Estilo padrão dos labels */
+#pag-pix + label,
+#pag-dinheiro + label,
+#pag-cartao + label {
+    color: #fff;
+    background: #ffa2e9;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+/* Quando selecionado */
+#pag-pix:checked + label,
+#pag-dinheiro:checked + label,
+#pag-cartao:checked + label {
+    background: #25d366;
+    transform: scale(1.05);
 }
