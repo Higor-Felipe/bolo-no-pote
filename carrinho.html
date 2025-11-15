@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <div id="msg-pagamento"></div>
+            <div id="msg-pagamento" class="qrcode-placeholder"></div>
 
             <div class="aviso-pagamento">
                 <spam>PAGAMENTOS IRÃO SER ACEITOS ATÉ DIA 17</spam>
@@ -121,20 +121,7 @@
                 img: "boloDoisamores.jpg"
             }
         ];
-        //copiar
-            function copyToClickBoard(btn) {
-                const chave = document.getElementById("dado").innerText;
-
-                navigator.clipboard.writeText(chave).then(() => {
-                    btn.innerText = "Chave Copiada!";
-                    btn.classList.add("copiado");
-
-                    setTimeout(() => {
-                        btn.innerText = "Copiar";
-                        btn.classList.remove("copiado");
-                    }, 2000);
-                });
-            }
+            
         // ============================================
         // RENDERIZAÇÃO DO CARRINHO
         // ============================================
@@ -188,26 +175,59 @@
             // ============================================
             document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
                 radio.addEventListener('change', () => {
-                    const msgDiv = document.getElementById('msg-pagamento');
-                    msgDiv.innerHTML = '';
+                    const qrcodeDiv = document.getElementById('msg-pagamento');
+                    qrcodeDiv.innerHTML = '';
                     const metodo = radio.value;
 
 
+                    let total = 0;
+                    carrinho.forEach(item => {
+                        total += item.preco * item.quantidade;
+                    });
+
                     if (metodo === 'pix') {
-                        msgDiv.innerHTML = `
-                            <div class="payment-info">
-                                <p class="mb-1 fw-bold">✅ PIX selecionado!</p>
+                        qrcodeDiv.innerHTML = `
+                            <div class="text-center p-4 bg-light rounded border shadow-sm">
+                                <h6 class="text-success mb-3">
+                                    <i class="fas fa-qrcode"></i> Pague via PIX
+                                </h6>
 
-                                <p id="dado" class="chavePix">543.354.448-11</p>
+                                <!-- QR CODE FIXO -->
+                                <img src="qrcode-pix.jpg" class="img-fluid mb-3"
+                                    style="max-width: 220px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" 
+                                    alt="QR Code PIX">
 
-                                <button class="botaoCopiar" onclick="copyToClickBoard(this)">Copiar</button><br><br>
-                                <h5 class="textoPix">O COMPROVANTE DEVE SER ENVIADO PELO WHATSAPP DO PEDIDO</h5>
-                            </div>`;
+                                <!-- VALOR TOTAL -->
+                                <p class="mb-2">
+                                    <strong class="text-success h5">Valor: R$ ${total.toFixed(2)}</strong>
+                                </p>
 
+                                <!-- CHAVE PIX + BOTÃO COPIAR -->
+                                <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                                    <p id="dado" class="chavePix mb-0 fw-bold text-primary">543.354.448-11</p>
+                                    <button class="btn btn-sm btn-outline-primary botaoCopiar" onclick="copyToClickBoard(this)">
+                                        <i class="fas fa-copy"></i> Copiar
+                                    </button>
+                                </div>
+
+                                <!-- AVISO COMPROVANTE -->
+                                <div class="bg-warning text-dark p-3 rounded small">
+                                    <p class="mb-0 fw-bold">
+                                        <i class="fas fa-exclamation-triangle"></i> 
+                                        O COMPROVANTE DEVE SER ENVIADO PELO WHATSAPP DO PEDIDO
+                                    </p>
+                                </div>
+
+                                <p class="small text-muted mt-3">
+                                    Escaneie o QR ou copie a chave e pague no app do banco.
+                                </p>
+                            </div>
+                        `;
+                        qrcodeDiv.scrollIntoView({ behavior: 'smooth' });
                     } else if (metodo === 'dinheiro') {
-                        msgDiv.innerHTML = `<div class="payment-info">💵 Pagamento em dinheiro será feito na hora da retirada.</div>`;
+                        qrcodeDiv.innerHTML = `<div class="payment-info text-center p-4">Pagamento em dinheiro será feito na hora da retirada.</div>`;
                     } else if (metodo === 'cartao') {
-                        msgDiv.innerHTML = `<div class="payment-info">💳 Pagamento com cartão (débito ou crédito) será na retirada ou combinado.</div>`;
+                        qrcodeDiv.innerHTML = `<div class="payment-info text-center p-4">Pagamento com cartão (débito ou crédito) será na retirada ou combinado.</div>`;
                     }
                 });
             });
@@ -256,6 +276,25 @@
         }
 
         document.addEventListener('DOMContentLoaded', renderizarCarrinho);
+
+        function copyToClickBoard(button) {
+            const chaveElement = button.previousElementSibling;
+            const chaveTexto = chaveElement.textContent.trim();
+
+            navigator.clipboard.writeText(chaveTexto).then(() => {
+                const original = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                button.classList.remove('btn-outline-primary');
+                button.classList.add('btn-success');
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    button.classList.remove('btn-success');
+                    button.classList.add('btn-outline-primary');
+                }, 2000);
+            }).catch(() => {
+                alert('Erro ao copiar. Copie manualmente: ' + chaveTexto);
+            });
+        }
     </script>
 
     </body>
